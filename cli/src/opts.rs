@@ -21,6 +21,11 @@ pub struct Opts {
 	#[clap(short, long, default_value = "docker.io/paritytech/srtool", global = true)]
 	pub image: String,
 
+	/// Specify the container image tag to use. If not provided, the latest
+	/// tag will be automatically fetched from GitHub.
+	#[clap(short, long, global = true)]
+	pub tag: Option<String>,
+
 	/// This option is DEPRECATED and has no effect
 	#[clap(short, long)]
 	pub json: bool,
