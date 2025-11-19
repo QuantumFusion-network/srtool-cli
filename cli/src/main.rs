@@ -41,7 +41,12 @@ fn main() -> Result<(), SrtoolError> {
 	debug!("Checking what is the latest available tag...");
 	const ONE_HOUR: u64 = 60 * 60;
 
-	let tag = get_image_tag(Some(ONE_HOUR)).expect("Issue getting the image tag");
+	let tag = if let Some(user_tag) = &opts.tag {
+		info!("Using user-specified tag: {}", user_tag);
+		user_tag.clone()
+	} else {
+		get_image_tag(Some(ONE_HOUR)).expect("Issue getting the image tag")
+	};
 
 	info!("Using {image}:{tag}");
 
